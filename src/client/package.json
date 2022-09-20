@@ -17,6 +17,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "path": "^0.12.7",
+    "phaser": "^3.55.2",
     "require": "^2.4.20",
     "terser-webpack-plugin": "^5.3.6",
     "webpack": "^5.74.0",
