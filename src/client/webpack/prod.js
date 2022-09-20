@@ -1,4 +1,5 @@
 const merge = require('webpack-merge'); // For merging this config // with base.js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // To minify // your JS file in the build folder
 const CopyPlugin = require('copy-webpack-plugin'); // To copy your // assets to the build folder
 const base = require('./base'); // Importing base.js file
