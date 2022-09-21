@@ -10,25 +10,58 @@ class Example extends Phaser.Scene
     preload ()
     {
         this.load.image('bg', '/assets/png/1f331.png');
-        this.load.image('ship', '/assets/png/1f468-1f3fe-200d-1f33e.png');
+        this.load.image('player', '/assets/png/1f468-1f3fe-200d-1f33e.png');
+        this.load.image('tree1', '/assets/png/1f332.png');
+        // this.load.tilemapTiledJSON('map1', '/assets/maps/map1.json');
+        this.load.tilemapTiledJSON('map', '/assets/maps/map1.json');
+        
     }
+
+    // create ()
+    // {
+    //     var map = this.make.tilemap({ key: 'map' });
+    //     var groundTiles = map.addTilesetImage('bg');
+    //     var coinTiles = map.addTilesetImage('tree1');
+        
+    //     map.createLayer('Background Layer', groundTiles, 0, 0);
+    //     // this.cameras.main.setBounds(0, 0, 1920 * 2, 1080 * 2);
+    //     // this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
+
+    //     this.player = this.physics.add.image(0, 0, 'player');
+        
+    //     this.cursors = this.input.keyboard.createCursorKeys();
+        
+
+    //     this.player.setCollideWorldBounds(true);
+    //     this.cameras.main.startFollow(this.player);
+
+    //     this.cameras.main.followOffset.set(0, 0);
+    // }
 
     create ()
     {
         this.cameras.main.setBounds(0, 0, 1920 * 2, 1080 * 2);
         this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
 
-        this.add.tileSprite(0,0,1920 * 2,1080 * 2,"bg")
+        this.add.tileSprite(0,0,1920 * 4,1080 * 4,"bg");
+        this.obstacles = this.add.group();
+        var tree1 = this.physics.add.image(200, 200, 'tree1');
+        var tree2 = this.physics.add.image(100, 100, 'tree1');
 
+        this.obstacles.add(tree1);
+        this.obstacles.add(tree2);
         this.cursors = this.input.keyboard.createCursorKeys();
-
-        this.player = this.physics.add.image(400, 300, 'ship');
-
+        
+        this.player = this.physics.add.image(400, 300, 'player');
+        this.physics.add.overlap(this.player, this.obstacles, this.onMeetEnemy, false, this);
         this.player.setCollideWorldBounds(true);
-
         this.cameras.main.startFollow(this.player);
 
-        this.cameras.main.followOffset.set(-300, 0);
+        this.cameras.main.followOffset.set(0, 0);
+    }
+
+    onMeetEnemy() {
+        this.player.setPosition(600,600)
     }
 
     update ()
@@ -39,13 +72,11 @@ class Example extends Phaser.Scene
         {
             this.player.setVelocityX(-500);
             this.player.setFlipX(true);
-            this.cameras.main.followOffset.x = 300;
         }
         else if (this.cursors.right.isDown)
         {
             this.player.setVelocityX(500);
             this.player.setFlipX(false);
-            this.cameras.main.followOffset.x = -300;
         }
 
         if (this.cursors.up.isDown)
@@ -64,6 +95,10 @@ const config = {
     parent: 'phaser-example',
     physics: {
         default: 'arcade',
+        arcade: {
+            gravity: { y: 0},
+            debug: true
+        }
     },
     scene: [ Example ]
 };
