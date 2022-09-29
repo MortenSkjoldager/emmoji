@@ -20,13 +20,13 @@ export default class zone3 extends Phaser.Scene
         const map = this.make.tilemap({ key: 'zone3'});
         const tileSet = map.addTilesetImage('grass', 'grass', 16, 16, 0, 0);
 
-        map.createStaticLayer('Ground', tileSet);
+        map.createLayer('Ground', tileSet);
         
         var scale = 1/(72 / 16);
         this.player = this.physics.add.image(0, 0, 'player');
         this.player.setScale(scale,scale);
 
-        var obstaclesLayer = map.createStaticLayer('Obstacles', tileSet);
+        var obstaclesLayer = map.createLayer('Obstacles', tileSet);
         obstaclesLayer.setCollisionByProperty({ collides: true })
 
         this.physics.add.collider(this.player, obstaclesLayer);
