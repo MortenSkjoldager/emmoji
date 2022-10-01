@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 
 export default class zone3 extends Phaser.Scene
 {
+    cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+    player!: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
+    
     constructor ()
     {
         super({
@@ -23,7 +26,7 @@ export default class zone3 extends Phaser.Scene
         map.createLayer('Ground', tileSet);
         
         var scale = 1/(72 / 16);
-        this.player = this.physics.add.image(0, 0, 'player');
+        this.player = this.physics.add.image(50, 50, 'player');
         this.player.setScale(scale,scale);
 
         var obstaclesLayer = map.createLayer('Obstacles', tileSet);

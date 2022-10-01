@@ -1,18 +1,23 @@
 import Phaser from 'phaser';
 
-export default class zone2 extends Phaser.Scene
+export default class zone1 extends Phaser.Scene
 {
+    private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+    private obstacles : any;
+    private player: any;
+
     constructor ()
     {
         super({
-            key: 'zone2'
+            key: 'zone1'
         });
     }
 
     preload ()
     {
-        this.load.image('bg1', '/assets/png/1f3fc.png');
-        this.load.image('home', '/assets/png/1f3e0.png');        
+        this.load.image('bg', '/assets/png/1f331.png');
+        this.load.image('player', '/assets/png/1f468-1f3fe-200d-1f33e.png');
+        this.load.image('tree1', '/assets/png/1f332.png');
     }
 
     create ()
@@ -20,16 +25,17 @@ export default class zone2 extends Phaser.Scene
         this.cameras.main.setBounds(0, 0, 1920 * 2, 1080 * 2);
         this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
 
-        this.add.tileSprite(0,0,1920 * 4,1080 * 4,"bg1");
-        
+        this.add.tileSprite(0,0,1920 * 4,1080 * 4,"bg");
         this.obstacles = this.add.group();
-        var home = this.physics.add.image(100, 100, 'home');
-        this.obstacles.add(home);
+        var tree1 = this.physics.add.image(200, 200, 'tree1');
+        var tree2 = this.physics.add.image(100, 100, 'tree1');
 
+        this.obstacles.add(tree1);
+        this.obstacles.add(tree2);
         this.cursors = this.input.keyboard.createCursorKeys();
         
         this.player = this.physics.add.image(400, 300, 'player');
-        this.physics.add.overlap(this.player, this.obstacles, this.onMeetObstacle, false, this);
+        this.physics.add.overlap(this.player, this.obstacles, this.onMeetObstacle);
         this.player.setCollideWorldBounds(true);
         this.cameras.main.startFollow(this.player);
 
@@ -37,7 +43,7 @@ export default class zone2 extends Phaser.Scene
     }
 
     onMeetObstacle() {
-        this.scene.start("zone1");
+        this.scene.start("zone2");
     }
 
     update ()
