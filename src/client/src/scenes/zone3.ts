@@ -1,9 +1,9 @@
+import Player from '../characters/player'
 import Phaser from 'phaser';
-
 export default class zone3 extends Phaser.Scene
 {
     cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
-    player!: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
+    player!: any;
     
     constructor ()
     {
@@ -14,6 +14,19 @@ export default class zone3 extends Phaser.Scene
 
     preload ()
     {
+        Phaser.GameObjects.GameObjectFactory.register('player', function (this: Phaser.GameObjects.GameObjectFactory, x: number, y: number, texture: string, frame?: string | number) {
+            var sprite = new Player(this.scene, x, y, texture, frame)
+        
+            this.displayList.add(sprite)
+            this.updateList.add(sprite)
+        
+            this.scene.physics.world.enableBody(sprite, Phaser.Physics.Arcade.DYNAMIC_BODY)
+        
+            sprite.body.setSize(sprite.width * 0.5, sprite.height * 0.8)
+        
+            return sprite
+        })
+
         this.cursors = this.input.keyboard.createCursorKeys();
   
     }
@@ -24,9 +37,8 @@ export default class zone3 extends Phaser.Scene
         const tileSet = map.addTilesetImage('grass', 'grass', 16, 16, 0, 0);
 
         map.createLayer('Ground', tileSet);
-        
         var scale = 1/(72 / 16);
-        this.player = this.physics.add.image(50, 50, 'player');
+        this.player = this.add.player(50, 50, 'player');
         this.player.setScale(scale,scale);
 
         var obstaclesLayer = map.createLayer('Obstacles', tileSet);
@@ -34,39 +46,16 @@ export default class zone3 extends Phaser.Scene
 
         this.physics.add.collider(this.player, obstaclesLayer);
         this.player.setCollideWorldBounds(true);
-        this.cameras.main.startFollow(this.player);
+        this.cameras.main.startFollow(this.player, true);
 
         this.cameras.main.followOffset.set(0, 0);
     }
 
-    onCollide() {
-        console.log('collide')
-        this.player.setVelocity(0);
-    }
-
     update ()
     {
-        let speed = 100;
-        this.player.setVelocity(0);
-
-        if (this.cursors.left.isDown)
-        {
-            this.player.setVelocityX(-1*speed);
-            this.player.setFlipX(true);
-        }
-        else if (this.cursors.right.isDown)
-        {
-            this.player.setVelocityX(1*speed);
-            this.player.setFlipX(false);
-        }
-
-        if (this.cursors.up.isDown)
-        {
-            this.player.setVelocityY(-1*speed);
-        }
-        else if (this.cursors.down.isDown)
-        {
-            this.player.setVelocityY(1*speed);
-        }
+        if (this.player)
+		{
+			this.player.update(this.cursors)
+		}
     }
 }
