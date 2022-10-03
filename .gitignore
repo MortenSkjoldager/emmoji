@@ -1,1 +1,9 @@
 src/client/node_modules/
+src/server/.idea/
+src/server/Model.Test/bin/
+src/server/Model.Test/obj/
+src/server/Model/obj/
+src/server/Model/bin/Debug/
+src/server/WebApplication1/obj/
+*.user
+src/server/.vs/
