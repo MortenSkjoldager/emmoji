@@ -14,3 +14,5 @@ src/server/Emmoji.Model/obj/
 src/server/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/Roslyn45/csc.rsp
 src/server/packages/
 src/server/Emmoji.Model/bin/
+src/server/Emmoji.Api.TestSite/obj/
+src/server/Emmoji.Api.TestSite/bin/
