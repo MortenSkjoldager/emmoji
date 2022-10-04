@@ -1,4 +1,4 @@
-using Model.Maps;
+using Emmoji.Model.Maps;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

@@ -1,4 +1,4 @@
-namespace Model.Maps;
+namespace Emmoji.Model.Maps;
 
 public class Map
 {

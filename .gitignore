@@ -7,3 +7,10 @@ src/server/Model/bin/Debug/
 src/server/WebApplication1/obj/
 *.user
 src/server/.vs/
+src/server/Emmoji.Chat.API/bin/
+*.cache
+src/server/Emmoji.Chat.API/obj/
+src/server/Emmoji.Model/obj/
+src/server/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/Roslyn45/csc.rsp
+src/server/packages/
+src/server/Emmoji.Model/bin/
