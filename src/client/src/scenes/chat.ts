@@ -3,6 +3,7 @@ export default class Chat extends Phaser.Scene
 {
     cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
     player!: any;
+    messages!: any;
     form: any;
     constructor ()
     {
@@ -22,15 +23,26 @@ export default class Chat extends Phaser.Scene
 
     create ()
     {        
-        this.form = this.add.dom(105,755).createFromCache('chat').setScrollFactor(0,0);
+        this.form = this.add.dom(105,555).createFromCache('chat').setScrollFactor(0,0);
         var element = this.form.getChildByID('message-box')
-        element.addEventListener('keyup', this.callback);
+        element.addEventListener('keyup', (event) => {
+            this.callback(event)
+        });
+
+        this.messages = this.form.getChildByID('messages');
     }
 
-    callback(event, key) {
+    callback(event) {
+        if (event.keyCode == 32) {
+            event.target.value = `${event.target.value} `;
+        }
         if (event.keyCode == 13) {
             const message = event.target.value;
-            alert(message)
+            let existingText = this.messages.innerText;
+            
+            this.messages.innerText = `${existingText} \n me: ${message}`;
+
+            event.target.value = '';
         }
 
         return true;
