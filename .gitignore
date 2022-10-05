@@ -16,3 +16,5 @@ src/server/packages/
 src/server/Emmoji.Model/bin/
 src/server/Emmoji.Api.TestSite/obj/
 src/server/Emmoji.Api.TestSite/bin/
+node_modules/@microsoft/
+node_modules/

@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors(x => x.WithOrigins("https://localhost:7050").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+app.UseCors(x => x.WithOrigins("https://localhost:7050", "http://localhost:8081").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 app.MapControllers();
 app.MapHub<ChatHub>("/chatHub");
 app.Run();
