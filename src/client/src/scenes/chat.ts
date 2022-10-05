@@ -37,15 +37,24 @@ export default class Chat extends Phaser.Scene
             event.target.value = `${event.target.value} `;
         }
         if (event.keyCode == 13) {
-            const message = event.target.value;
-            let existingText = this.messages.innerText;
             
-            this.messages.innerText = `${existingText} \n me: ${message}`;
-
-            event.target.value = '';
+            const message = event.target.value;
+            
+            if (!this.isEmptyOrSpaces(message))
+            {
+                let existingText = this.messages.innerText;
+            
+                this.messages.innerText = `${existingText} \n me: ${message}`;
+    
+                event.target.value = '';
+            }
         }
 
         return true;
+    }
+
+    isEmptyOrSpaces(str){
+        return str === null || str.match(/^ *$/) !== null;
     }
 
     update ()
