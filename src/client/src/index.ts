@@ -1,4 +1,7 @@
 import Phaser from 'phaser';
 import config from './config';
 
-export default new Phaser.Game(config);
+let game : any; 
+
+game = new Phaser.Game(config);
+export default game;
