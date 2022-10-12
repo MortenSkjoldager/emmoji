@@ -23,6 +23,7 @@ export default {
         mode: Phaser.Scale.FIT,
         parent: 'body',
         autoCenter: Phaser.Scale.CENTER_BOTH,
+        zoom: 2
     },
     scene: [preloader, login, zone1, zone2, zone3, chat ]
 };

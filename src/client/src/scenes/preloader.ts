@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-
+import Player from '../characters/player'
 export default class preloader extends Phaser.Scene
 {
     constructor ()
@@ -10,6 +10,20 @@ export default class preloader extends Phaser.Scene
     }
 
     preload() {
+
+        Phaser.GameObjects.GameObjectFactory.register('player', function (this: Phaser.GameObjects.GameObjectFactory, x: number, y: number, texture: string, frame?: string | number) {
+            var sprite = new Player(this.scene, x, y, texture, frame)
+        
+            this.displayList.add(sprite)
+            this.updateList.add(sprite)
+        
+            this.scene.physics.world.enableBody(sprite, Phaser.Physics.Arcade.DYNAMIC_BODY)
+        
+            sprite.body.setSize(sprite.width * 0.5, sprite.height * 0.8)
+        
+            return sprite
+        })
+
         this.load.html('chat', 'assets/domelements/chat.html');
         this.load.html('login', 'assets/domelements/login.html');
         this.load.image('grass', '/assets/png/ninjikin/GRASS+.png')
@@ -18,6 +32,6 @@ export default class preloader extends Phaser.Scene
     }
 
     create() {
-        this.scene.start('zone3')
+        this.scene.start('login')
     }
 }
