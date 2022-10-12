@@ -18,3 +18,5 @@ src/server/Emmoji.Api.TestSite/obj/
 src/server/Emmoji.Api.TestSite/bin/
 node_modules/@microsoft/
 node_modules/
+src/server/Emmoji.Authentication.API/bin/
+src/server/Emmoji.Authentication.API/obj/

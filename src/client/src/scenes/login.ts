@@ -5,17 +5,25 @@ export default class Login extends Phaser.Scene
 {
     form: any;
     player!: any;
-    direction: integer;
+    directionX: integer;
+    directionY: integer;
+    speed: integer;
+    directions: integer[];
     constructor ()
     {
         super({
             key: 'login'
         });
 
-        this.direction = 1;
-
+        this.directions = [
+            -1,0,1
+        ]
+        this.speed = 100;
+        this.directionX = 100;
+        this.directionY = 0;
         setInterval(() => {
-            this.direction = this.getRandomNumberBetween(1,8)
+            this.directionX = this.getRandomDirection();
+            this.directionY = this.getRandomDirection();
         }, 2500)
     }
 
@@ -23,72 +31,34 @@ export default class Login extends Phaser.Scene
         
     }
 
-    getRandomNumberBetween(min,max){
-        return Math.floor(Math.random()*(max-min+1)+min);
+    getRandomDirection(){
+        let min = 1;
+        let max = 3;
+
+        let random = Math.floor(Math.random()*(max-min+1)+min) - 1;
+
+        return this.directions[random] * this.speed;
     }
 
     update() {
-        let speed = 100;
-        if (this.direction == 1) { //east
-            this.player.setVelocityX(speed);
-            this.player.setVelocityY(0);
-        }
-
-        if (this.direction == 2) { //south east 
-            this.player.setVelocityX(speed);
-            this.player.setVelocityY(speed);
-        }
-        if (this.direction == 3) { //south
-            this.player.setVelocityX(0);
-            this.player.setVelocityY(speed);
-        }
-        if (this.direction == 4) { //south west
-            this.player.setVelocityX(speed*-1);
-            this.player.setVelocityY(speed);
-        }
-
-        if (this.direction == 5) { //west
-            this.player.setVelocityX(speed*-1);
-            this.player.setVelocityY(0);
-        }
-
-        if (this.direction == 5) { //north west
-            this.player.setVelocityX(speed*-1);
-            this.player.setVelocityY(speed*-1);
-        }
-
-        if (this.direction == 6) { //north
-            this.player.setVelocityX(0);
-            this.player.setVelocityY(speed*-1);
-        }
-
-        if (this.direction == 7) { //north east 
-            this.player.setVelocityX(speed);
-            this.player.setVelocityY(speed*-1);
-        }
-
+        this.player.setVelocityX(this.directionX);
+        this.player.setVelocityY(this.directionY);
     }
 
     create() {
         const map = this.make.tilemap({ key: 'zone3'});
         const tileSet = map.addTilesetImage('grass', 'grass', 16, 16, 0, 0);
         map.createLayer('Ground', tileSet);
+        this.physics.world.setBounds(0,0,300*16,300*16);
 
         var scale = 1/(72 / 16);
-        this.player = this.add.player(50, 50, 'player');
+        this.player = this.add.player(1200, 1200, 'player');
         this.player.setScale(scale,scale);
         this.player.setCollideWorldBounds(true);
-        this.form = this.add.dom(400,200).createFromCache('login').setScrollFactor(0,0);
         this.cameras.main.startFollow(this.player, true);
-        var element = this.form.getChildByID('login-button')
-        element.addEventListener('click', (event) => {
-            var username = this.form.getChildByID('username').value;
-            var password = this.form.getChildByID('password').value;
-
-            this.scene.start('zone3')
-        });
-
         this.cameras.main.zoom = 2;
+
+        this.scene.launch('loginOverlay');
 
     }
 }

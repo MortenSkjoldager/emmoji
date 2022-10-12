@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{957E7C13-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emmoji.Chat.API", "Emmoji.Chat.API\Emmoji.Chat.API.csproj", "{88EE575C-FFE6-4356-A14B-063B14D3F9BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emmoji.Api.TestSite", "Emmoji.Api.TestSite\Emmoji.Api.TestSite.csproj", "{8B2FED72-CF36-491A-8441-725D036E17DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emmoji.Api.TestSite", "Emmoji.Api.TestSite\Emmoji.Api.TestSite.csproj", "{8B2FED72-CF36-491A-8441-725D036E17DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emmoji.Authentication.API", "Emmoji.Authentication.API\Emmoji.Authentication.API.csproj", "{9AB46AE8-9EF6-47FE-B66C-D27C79AA7457}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{8B2FED72-CF36-491A-8441-725D036E17DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B2FED72-CF36-491A-8441-725D036E17DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2FED72-CF36-491A-8441-725D036E17DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB46AE8-9EF6-47FE-B66C-D27C79AA7457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB46AE8-9EF6-47FE-B66C-D27C79AA7457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB46AE8-9EF6-47FE-B66C-D27C79AA7457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB46AE8-9EF6-47FE-B66C-D27C79AA7457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

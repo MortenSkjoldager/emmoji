@@ -5,6 +5,7 @@ import zone2 from './scenes/zone2'
 import zone3 from './scenes/zone3'
 import chat from './scenes/chat'
 import login from './scenes/login'
+import loginOverlay from './scenes/login-overlay'
 
 export default {
     type: Phaser.AUTO,
@@ -25,5 +26,5 @@ export default {
         autoCenter: Phaser.Scale.CENTER_BOTH,
         zoom: 2
     },
-    scene: [preloader, login, zone1, zone2, zone3, chat ]
+    scene: [preloader, loginOverlay, login, zone1, zone2, zone3, chat ]
 };
